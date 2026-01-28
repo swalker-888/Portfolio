@@ -326,6 +326,32 @@
             color: #2563eb;
         }
         
+        .article-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .article-list li {
+            padding: 16px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .article-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .article-list a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.05rem;
+            transition: color 0.2s;
+        }
+        
+        .article-list a:hover {
+            color: #2563eb;
+        }
+        
         .article-card {
             display: block;
             padding: 28px;
@@ -528,61 +554,13 @@
         
         <div class="section">
             <p class="section-title">Latest Writing</p>
-            <a href="predictive-analytics-retail-article.html" class="article-card" style="margin-bottom: 20px;">
-                <div class="article-card-header">
-                    <img src="steve-headshot.jpg" alt="Steve Walker" class="article-card-avatar">
-                    <div class="article-card-content">
-                        <span class="article-card-tag">Predictive Analytics</span>
-                        <h3 class="article-card-title">Predictive Analytics in Retail: From Forecasting to Real-Time Decision Engines</h3>
-                        <p class="article-card-excerpt">The gap between retailers who guess and retailers who know is widening fast. Practical applications, tools, and ROI — including a deep dive into the Boots Hearingcare case study.</p>
-                        <span class="article-card-date">January 28, 2026</span>
-                    </div>
-                </div>
-            </a>
-            <a href="mcp-marketing-article.html" class="article-card" style="margin-bottom: 20px;">
-                <div class="article-card-header">
-                    <img src="steve-headshot.jpg" alt="Steve Walker" class="article-card-avatar">
-                    <div class="article-card-content">
-                        <span class="article-card-tag">AI Infrastructure</span>
-                        <h3 class="article-card-title">MCP: The Protocol That Will Transform Marketing Automation</h3>
-                        <p class="article-card-excerpt">Anthropic's Model Context Protocol is the USB-C of AI applications — a universal connector that lets AI agents plug into any tool, database, or API. For marketers, this changes everything.</p>
-                        <span class="article-card-date">January 29, 2026</span>
-                    </div>
-                </div>
-            </a>
-            <a href="ai-seo-article.html" class="article-card" style="margin-bottom: 20px;">
-                <div class="article-card-header">
-                    <img src="steve-headshot.jpg" alt="Steve Walker" class="article-card-avatar">
-                    <div class="article-card-content">
-                        <span class="article-card-tag">SEO & AI</span>
-                        <h3 class="article-card-title">The Death of Keywords: How AI is Rewriting the Rules of SEO</h3>
-                        <p class="article-card-excerpt">For two decades, SEO was built on keywords. But AI-powered search understands entities, intent, and context. The playbook that got you here won't get you there.</p>
-                        <span class="article-card-date">January 29, 2026</span>
-                    </div>
-                </div>
-            </a>
-            <a href="ai-agents-b2b-article.html" class="article-card" style="margin-bottom: 20px;">
-                <div class="article-card-header">
-                    <img src="steve-headshot.jpg" alt="Steve Walker" class="article-card-avatar">
-                    <div class="article-card-content">
-                        <span class="article-card-tag">B2B Sales</span>
-                        <h3 class="article-card-title">AI Agents Are Coming for B2B Sales (And That's a Good Thing)</h3>
-                        <p class="article-card-excerpt">The traditional SDR role is being automated. AI agents can now research prospects, personalize outreach, and book meetings — at a fraction of the cost. Here's what it means.</p>
-                        <span class="article-card-date">January 29, 2026</span>
-                    </div>
-                </div>
-            </a>
-            <a href="ucp-article.html" class="article-card">
-                <div class="article-card-header">
-                    <img src="steve-headshot.jpg" alt="Steve Walker" class="article-card-avatar">
-                    <div class="article-card-content">
-                        <span class="article-card-tag">Agentic Commerce</span>
-                        <h3 class="article-card-title">Google's Universal Commerce Protocol: The Infrastructure for Agentic Shopping</h3>
-                        <p class="article-card-excerpt">Google just announced UCP — an open standard that could fundamentally reshape how AI agents interact with e-commerce. Here's what you need to know.</p>
-                        <span class="article-card-date">January 28, 2026</span>
-                    </div>
-                </div>
-            </a>
+            <ul class="article-list">
+                <li><a href="predictive-analytics-retail-article.html">Predictive Analytics in Retail: From Forecasting to Real-Time Decision Engines</a></li>
+                <li><a href="mcp-marketing-article.html">MCP: The Protocol That Will Transform Marketing Automation</a></li>
+                <li><a href="ai-seo-article.html">The Death of Keywords: How AI is Rewriting the Rules of SEO</a></li>
+                <li><a href="ai-agents-b2b-article.html">AI Agents Are Coming for B2B Sales (And That's a Good Thing)</a></li>
+                <li><a href="ucp-article.html">Google's Universal Commerce Protocol: The Infrastructure for Agentic Shopping</a></li>
+            </ul>
         </div>
         
         <div class="section">
