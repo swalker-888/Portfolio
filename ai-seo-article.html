@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Death of Keywords: How AI is Rewriting the Rules of SEO | Steve Walker</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #000;
+            min-height: 100vh;
+            color: #e0e0e0;
+            line-height: 1.8;
+        }
+        
+        .grid-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                linear-gradient(rgba(0, 255, 136, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 136, 0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 60px 24px;
+        }
+        
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #00ff88;
+            text-decoration: none;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            margin-bottom: 40px;
+            transition: gap 0.2s;
+        }
+        
+        .back-link:hover {
+            gap: 12px;
+        }
+        
+        .article-meta {
+            margin-bottom: 24px;
+        }
+        
+        .article-tag {
+            display: inline-block;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: #00ff88;
+            background: rgba(0, 255, 136, 0.1);
+            border: 1px solid rgba(0, 255, 136, 0.3);
+            padding: 6px 14px;
+            border-radius: 4px;
+            margin-bottom: 16px;
+            text-transform: uppercase;
+        }
+        
+        .article-date {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            color: #666;
+        }
+        
+        h1 {
+            font-size: clamp(2rem, 5vw, 2.8rem);
+            font-weight: 700;
+            margin-bottom: 24px;
+            letter-spacing: -1px;
+            line-height: 1.2;
+            color: #fff;
+        }
+        
+        .highlight {
+            background: linear-gradient(90deg, #00ff88, #00d4ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .lead {
+            font-size: 1.25rem;
+            color: #888;
+            margin-bottom: 48px;
+            line-height: 1.7;
+        }
+        
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 48px 0 20px;
+            color: #fff;
+        }
+        
+        h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin: 36px 0 16px;
+            color: #fff;
+        }
+        
+        p {
+            margin-bottom: 20px;
+            color: #bbb;
+        }
+        
+        strong {
+            color: #fff;
+            font-weight: 600;
+        }
+        
+        a {
+            color: #00ff88;
+            text-decoration: none;
+        }
+        
+        a:hover {
+            text-decoration: underline;
+        }
+        
+        ul, ol {
+            margin: 0 0 24px 24px;
+            color: #bbb;
+        }
+        
+        li {
+            margin-bottom: 12px;
+        }
+        
+        .callout {
+            background: linear-gradient(135deg, rgba(0, 255, 136, 0.08), rgba(0, 212, 255, 0.03));
+            border: 1px solid rgba(0, 255, 136, 0.2);
+            border-left: 3px solid #00ff88;
+            border-radius: 8px;
+            padding: 24px;
+            margin: 32px 0;
+        }
+        
+        .callout p {
+            margin: 0;
+            color: #ccc;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px;
+            margin: 32px 0;
+        }
+        
+        .stat-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 24px;
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 2rem;
+            font-weight: 700;
+            color: #00ff88;
+            margin-bottom: 8px;
+        }
+        
+        .stat-label {
+            font-size: 0.85rem;
+            color: #666;
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 32px 0;
+        }
+        
+        .comparison-table th,
+        .comparison-table td {
+            padding: 16px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .comparison-table th {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            color: #00ff88;
+            background: rgba(0, 255, 136, 0.05);
+        }
+        
+        .comparison-table td {
+            color: #999;
+            font-size: 0.95rem;
+        }
+        
+        .comparison-table tr:hover td {
+            background: rgba(255, 255, 255, 0.02);
+        }
+        
+        code {
+            font-family: 'JetBrains Mono', monospace;
+            background: rgba(0, 255, 136, 0.1);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.9em;
+            color: #00ff88;
+        }
+        
+        .author-box {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 32px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            margin-top: 60px;
+        }
+        
+        .author-avatar {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #00ff88, #00d4ff);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+        
+        .author-info h4 {
+            font-size: 1.1rem;
+            margin-bottom: 4px;
+            color: #fff;
+        }
+        
+        .author-info p {
+            margin: 0;
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .footer {
+            margin-top: 80px;
+            padding-top: 40px;
+            border-top: 1px solid #111;
+            color: #333;
+            font-size: 0.85rem;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                padding: 40px 20px;
+            }
+            
+            .author-box {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .comparison-table {
+                font-size: 0.85rem;
+            }
+            
+            .comparison-table th,
+            .comparison-table td {
+                padding: 12px 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="grid-bg"></div>
+    
+    <div class="container">
+        <a href="index.html" class="back-link">← Back to home</a>
+        
+        <article>
+            <div class="article-meta">
+                <span class="article-tag">SEO & AI</span>
+                <p class="article-date">January 29, 2026</p>
+            </div>
+            
+            <h1>The Death of Keywords: <span class="highlight">How AI is Rewriting the Rules of SEO</span></h1>
+            
+            <p class="lead">
+                For two decades, SEO was built on keywords. Find what people search for, put those words on your page, build some links, rank higher. That playbook is dying. AI-powered search understands entities, intent, and context — and it's changing everything about how we optimize for discovery.
+            </p>
+            
+            <h2>The shift nobody saw coming</h2>
+            
+            <p>
+                In 2023, Google rolled out AI Overviews (initially called SGE) to a limited audience. By 2025, they were everywhere. And suddenly, the game changed.
+            </p>
+            
+            <p>
+                Instead of scanning blue links and clicking through to find answers, users now get <strong>synthesized responses</strong> pulled from multiple sources, contextualized by AI, and presented directly in the search results. The click-through that was once the goal? It's becoming optional.
+            </p>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value">60%</div>
+                    <div class="stat-label">Of searches now trigger AI Overviews</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">-25%</div>
+                    <div class="stat-label">Average CTR decline for informational queries</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">8.2s</div>
+                    <div class="stat-label">Average time users spend reading AI Overviews</div>
+                </div>
+            </div>
+            
+            <p>
+                This isn't a tweak to the algorithm. It's a fundamental restructuring of how search works — and it demands a fundamental restructuring of how we think about SEO.
+            </p>
+            
+            <h2>From keywords to entities: The real paradigm shift</h2>
+            
+            <p>
+                Here's the thing most marketers miss: Google stopped being a keyword-matching engine years ago. The <strong>Knowledge Graph</strong>, introduced in 2012, was the beginning. AI just accelerated the transition.
+            </p>
+            
+            <p>
+                Modern search engines don't ask "Does this page contain the words the user typed?" They ask "Does this page meaningfully address what the user wants to accomplish?"
+            </p>
+            
+            <div class="callout">
+                <p><strong>Entity-based search</strong> means Google understands that "Apple," "Apple Inc.," "the iPhone company," and "Tim Cook's employer" all refer to the same thing — and can connect them to related concepts like iOS, Steve Jobs, and Cupertino. Keywords are just one signal pointing toward entities.</p>
+            </div>
+            
+            <p>
+                This shift has massive implications:
+            </p>
+            
+            <table class="comparison-table">
+                <tr>
+                    <th>Old SEO (Keywords)</th>
+                    <th>New SEO (Entities)</th>
+                </tr>
+                <tr>
+                    <td>Target exact-match phrases</td>
+                    <td>Build topical authority around concepts</td>
+                </tr>
+                <tr>
+                    <td>Optimize individual pages</td>
+                    <td>Optimize content ecosystems</td>
+                </tr>
+                <tr>
+                    <td>Measure keyword rankings</td>
+                    <td>Measure entity associations</td>
+                </tr>
+                <tr>
+                    <td>Link building for authority</td>
+                    <td>Entity validation through citations</td>
+                </tr>
+                <tr>
+                    <td>Content silos by keyword</td>
+                    <td>Knowledge graphs by topic</td>
+                </tr>
+            </table>
+            
+            <h2>AI Overviews: Friend or foe?</h2>
+            
+            <p>
+                Let's address the elephant in the room: AI Overviews are eating clicks. If Google answers the question directly, why would anyone click through to your site?
+            </p>
+            
+            <p>
+                The pessimistic view: SEO is dead. Google is stealing your content to answer queries themselves.
+            </p>
+            
+            <p>
+                The realistic view: <strong>The nature of valuable SEO traffic is changing</strong>. Here's what we're actually seeing:
+            </p>
+            
+            <ul>
+                <li><strong>Informational queries are commoditized.</strong> If users just want a quick answer, they'll get it from the AI Overview. Optimizing for "what is X" queries yields diminishing returns.</li>
+                <li><strong>Transactional and commercial queries still drive clicks.</strong> Users comparing products, researching purchases, or looking for services still click through — often more qualified than before.</li>
+                <li><strong>Being cited in AI Overviews is the new Page 1.</strong> When your content is synthesized into Google's response, you get brand visibility even without the click.</li>
+                <li><strong>Deep expertise wins.</strong> AI can summarize surface-level information. It can't replicate genuine expertise, original research, or unique perspectives.</li>
+            </ul>
+            
+            <h3>How to optimize for AI Overview citations</h3>
+            
+            <p>
+                Getting cited in AI Overviews isn't random. We've analyzed thousands of citations and found consistent patterns:
+            </p>
+            
+            <ol>
+                <li><strong>Clear, direct answers in the first 100 words.</strong> AI Overviews love content that gets to the point. Lead with the answer, then expand.</li>
+                <li><strong>Structured data matters more than ever.</strong> Schema markup helps Google understand what your content is about and how it relates to entities.</li>
+                <li><strong>First-person expertise signals.</strong> Content with clear authorship, credentials, and experience indicators gets cited more frequently.</li>
+                <li><strong>Comprehensive coverage with clear sections.</strong> Well-organized content with descriptive headers is easier for AI to parse and cite.</li>
+                <li><strong>Recency for time-sensitive topics.</strong> Fresh content gets prioritized for queries where timeliness matters.</li>
+            </ol>
+            
+            <h2>Conversational search: The interface revolution</h2>
+            
+            <p>
+                Beyond AI Overviews, there's an even bigger shift: <strong>how people search is changing</strong>.
+            </p>
+            
+            <p>
+                Traditional search queries were awkward compromises. Users learned to speak "search engine" — fragmenting natural questions into keyword strings. "Best running shoes flat feet 2026" instead of "What running shoes should I get if I have flat feet?"
+            </p>
+            
+            <p>
+                AI has eliminated that friction. Users now search the way they talk:
+            </p>
+            
+            <ul>
+                <li>"I'm renovating my kitchen on a $15k budget and want a modern look — what should I prioritize?"</li>
+                <li>"My 8-year-old loves dinosaurs and we're visiting London next month. What should we do?"</li>
+                <li>"Compare the new MacBook Air with the Dell XPS for someone who travels frequently and does video editing."</li>
+            </ul>
+            
+            <div class="callout">
+                <p><strong>Key insight:</strong> Conversational queries contain more context, more intent signals, and more specificity than traditional searches. The AI can understand nuance, qualifiers, and constraints — and users are taking advantage of it.</p>
+            </div>
+            
+            <p>
+                This changes content strategy fundamentally. You're no longer optimizing for "best kitchen renovation ideas" — you're optimizing for a range of conversational expressions of that intent, many of which you'll never predict.
+            </p>
+            
+            <h2>The new SEO playbook</h2>
+            
+            <p>
+                Enough theory. Here's what to actually do:
+            </p>
+            
+            <h3>1. Build entity authority, not keyword rankings</h3>
+            
+            <p>
+                Your goal is to become the definitive source on topics, not pages. This means:
+            </p>
+            
+            <ul>
+                <li>Creating content clusters around core entities (products, concepts, people)</li>
+                <li>Internal linking that reflects entity relationships</li>
+                <li>Consistent terminology and entity references across your site</li>
+                <li>Getting referenced by authoritative sources in your space</li>
+            </ul>
+            
+            <h3>2. Optimize for intent, not queries</h3>
+            
+            <p>
+                Stop chasing individual keywords. Instead, identify the <strong>jobs to be done</strong> your content serves:
+            </p>
+            
+            <ul>
+                <li>What problem is the user trying to solve?</li>
+                <li>What decision are they trying to make?</li>
+                <li>What task are they trying to complete?</li>
+            </ul>
+            
+            <p>
+                Then create content that comprehensively serves that intent, regardless of how users phrase their query.
+            </p>
+            
+            <h3>3. Invest in E-E-A-T signals</h3>
+            
+            <p>
+                Google's <strong>Experience, Expertise, Authoritativeness, and Trustworthiness</strong> guidelines have never been more important. In an AI-mediated search world, Google needs strong signals to determine which sources to trust for synthesis.
+            </p>
+            
+            <ul>
+                <li>Clear author bylines with credentials</li>
+                <li>First-person experience ("In my 10 years managing PPC campaigns...")</li>
+                <li>Citations to primary sources</li>
+                <li>Regular content updates with visible timestamps</li>
+                <li>Strong brand presence across the web</li>
+            </ul>
+            
+            <h3>4. Structure everything</h3>
+            
+            <p>
+                AI systems need structured data to understand your content. Implement:
+            </p>
+            
+            <ul>
+                <li><code>Article</code>, <code>HowTo</code>, <code>FAQ</code>, and <code>Product</code> schema</li>
+                <li>Clear heading hierarchies (H1 → H2 → H3)</li>
+                <li>Descriptive anchor text for internal links</li>
+                <li>Alt text that describes images semantically</li>
+                <li>Tables and lists for comparative information</li>
+            </ul>
+            
+            <h3>5. Create content AI can't replicate</h3>
+            
+            <p>
+                The ultimate moat is content that requires something AI doesn't have:
+            </p>
+            
+            <ul>
+                <li><strong>Original research:</strong> Primary data, surveys, experiments</li>
+                <li><strong>Expert interviews:</strong> Unique perspectives from practitioners</li>
+                <li><strong>Proprietary analysis:</strong> Insights from your own data</li>
+                <li><strong>Real-world testing:</strong> Hands-on product reviews, case studies</li>
+                <li><strong>Timely reporting:</strong> Breaking news, live events, emerging trends</li>
+            </ul>
+            
+            <h2>Measuring success in the new era</h2>
+            
+            <p>
+                Traditional SEO metrics are becoming less useful. Here's what to track instead:
+            </p>
+            
+            <ul>
+                <li><strong>Share of AI Overview citations</strong> — Are you being cited in synthesized results?</li>
+                <li><strong>Brand search volume</strong> — Are more people searching for you directly?</li>
+                <li><strong>Engagement depth</strong> — When people do visit, do they stay and convert?</li>
+                <li><strong>Entity associations</strong> — What concepts is your brand connected to in search?</li>
+                <li><strong>Referral diversity</strong> — Are you discoverable through multiple AI surfaces (ChatGPT, Perplexity, Gemini)?</li>
+            </ul>
+            
+            <div class="callout">
+                <p><strong>Pro tip:</strong> Set up tracking for AI-referred traffic. ChatGPT, Perplexity, and other AI assistants are becoming meaningful traffic sources. Most analytics setups don't segment them properly.</p>
+            </div>
+            
+            <h2>The bottom line</h2>
+            
+            <p>
+                Keywords aren't dead — they're just not the point anymore. They're one signal among many that point toward entities, intents, and relationships.
+            </p>
+            
+            <p>
+                The SEO professionals who thrive in this new era will be the ones who think like AI systems: understanding concepts and relationships, not just matching strings. The ones who create genuinely valuable content that AI wants to cite. The ones who build authority through expertise, not link schemes.
+            </p>
+            
+            <p>
+                The playbook that worked for the last 20 years won't work for the next 5. Adapt now, or watch your organic traffic evaporate into AI-generated summaries that don't mention you.
+            </p>
+            
+            <p>
+                The good news? If you're reading this, you're already ahead of most. Now go build something worth citing.
+            </p>
+            
+            <div class="author-box">
+                <div class="author-avatar">SW</div>
+                <div class="author-info">
+                    <h4>Steve Walker</h4>
+                    <p>AI & Performance Marketing at Journey Further. Building intelligent marketing systems that turn data into decisions.</p>
+                </div>
+            </div>
+        </article>
+        
+        <div class="footer">
+            <p>© 2026 steve_walker</p>
+        </div>
+    </div>
+</body>
+</html>

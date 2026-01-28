@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Steve Walker | AI & Performance Marketing</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #121212 0%, #1a1a1a 50%, #262626 100%);
+            min-height: 100vh;
+            color: #fff;
+            line-height: 1.6;
+        }
+        
+        .grid-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .glow {
+            position: fixed;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.02) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 60px 24px;
+        }
+        
+        .hero {
+            padding: 80px 0 60px;
+        }
+        
+        .terminal-tag {
+            display: inline-block;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            color: #00ff88;
+            background: rgba(0, 255, 136, 0.1);
+            border: 1px solid rgba(0, 255, 136, 0.3);
+            padding: 6px 14px;
+            border-radius: 4px;
+            margin-bottom: 24px;
+        }
+        
+        h1 {
+            font-size: clamp(2.5rem, 8vw, 4rem);
+            font-weight: 700;
+            margin-bottom: 20px;
+            letter-spacing: -2px;
+        }
+        
+        .highlight {
+            background: linear-gradient(90deg, #00ff88, #00d4ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .tagline {
+            font-size: 1.35rem;
+            color: #666;
+            margin-bottom: 32px;
+            font-weight: 300;
+            max-width: 600px;
+        }
+        
+        .company-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #00ff88;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            font-family: 'JetBrains Mono', monospace;
+            transition: all 0.2s;
+        }
+        
+        .company-link:hover {
+            color: #00ffaa;
+            gap: 12px;
+        }
+        
+        .section {
+            margin-top: 80px;
+        }
+        
+        .section-title {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #00ff88;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .section-title::before {
+            content: '>';
+        }
+        
+        .about-text {
+            font-size: 1.15rem;
+            color: #999;
+            max-width: 700px;
+        }
+        
+        .case-study {
+            background: linear-gradient(135deg, rgba(0, 255, 136, 0.05), rgba(0, 212, 255, 0.02));
+            border: 1px solid rgba(0, 255, 136, 0.15);
+            border-radius: 16px;
+            padding: 36px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .case-study::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #00ff88, transparent);
+        }
+        
+        .case-study-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+        
+        .case-study-client {
+            font-size: 1.4rem;
+            font-weight: 600;
+        }
+        
+        .case-study-tag {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            color: #00ff88;
+            background: rgba(0, 255, 136, 0.1);
+            padding: 4px 10px;
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+        
+        .case-study-desc {
+            color: #888;
+            margin-bottom: 24px;
+            font-size: 1rem;
+        }
+        
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 28px;
+        }
+        
+        .tech {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            padding: 6px 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            color: #aaa;
+        }
+        
+        .metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 20px;
+        }
+        
+        .metric {
+            text-align: center;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 8px;
+        }
+        
+        .metric-value {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #00ff88;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        
+        .metric-label {
+            font-size: 0.8rem;
+            color: #666;
+            margin-top: 4px;
+        }
+        
+        .expertise {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        
+        .skill {
+            font-family: 'JetBrains Mono', monospace;
+            padding: 10px 18px;
+            background: transparent;
+            border: 1px solid #222;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            color: #777;
+            transition: all 0.2s;
+        }
+        
+        .skill:hover {
+            border-color: #00ff88;
+            color: #00ff88;
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.1);
+        }
+        
+        .skill.primary {
+            border-color: rgba(0, 255, 136, 0.4);
+            color: #00ff88;
+        }
+        
+        .companies {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            align-items: center;
+        }
+        
+        .company {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 20px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: #ccc;
+            transition: all 0.2s;
+        }
+        
+        .company:hover {
+            border-color: rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.05);
+        }
+        
+        .company-logo {
+            width: 24px;
+            height: 24px;
+            object-fit: contain;
+            border-radius: 4px;
+        }
+        
+        .connect {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+        
+        .connect-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 28px;
+            background: #00ff88;
+            color: #000;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.2s;
+        }
+        
+        .connect-btn:hover {
+            background: #00ffaa;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 40px rgba(0, 255, 136, 0.2);
+        }
+        
+        .connect-btn.secondary {
+            background: transparent;
+            border: 1px solid #333;
+            color: #fff;
+        }
+        
+        .connect-btn.secondary:hover {
+            border-color: #00ff88;
+            color: #00ff88;
+        }
+        
+        .article-card {
+            display: block;
+            padding: 28px;
+            background: linear-gradient(135deg, rgba(0, 255, 136, 0.05), rgba(0, 212, 255, 0.02));
+            border: 1px solid rgba(0, 255, 136, 0.15);
+            border-radius: 12px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .article-card:hover {
+            border-color: rgba(0, 255, 136, 0.4);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 40px rgba(0, 255, 136, 0.1);
+        }
+        
+        .article-card-tag {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            color: #00ff88;
+            background: rgba(0, 255, 136, 0.1);
+            padding: 4px 10px;
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+        
+        .article-card-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #fff;
+            margin: 16px 0 12px;
+            line-height: 1.3;
+        }
+        
+        .article-card-excerpt {
+            font-size: 0.95rem;
+            color: #888;
+            margin-bottom: 16px;
+            line-height: 1.6;
+        }
+        
+        .article-card-date {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            color: #555;
+        }
+        
+        .article-card-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+        }
+        
+        .article-card-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            object-fit: cover;
+            flex-shrink: 0;
+            border: 2px solid rgba(0, 255, 136, 0.3);
+        }
+        
+        .article-card-content {
+            flex: 1;
+        }
+        
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        .form-group label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 14px 16px;
+            color: #fff;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            transition: all 0.2s;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #00ff88;
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.1);
+        }
+        
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: #555;
+        }
+        
+        .form-group textarea {
+            min-height: 140px;
+            resize: vertical;
+        }
+        
+        .submit-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 16px 32px;
+            background: #00ff88;
+            color: #000;
+            border: none;
+            border-radius: 8px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            width: fit-content;
+        }
+        
+        .submit-btn:hover {
+            background: #00ffaa;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 40px rgba(0, 255, 136, 0.2);
+        }
+        
+        .footer {
+            margin-top: 100px;
+            padding-top: 40px;
+            border-top: 1px solid #fff;
+            color: #fff;
+            font-size: 0.85rem;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                padding: 40px 20px;
+            }
+            
+            .hero {
+                padding: 40px 0;
+            }
+            
+            .section {
+                margin-top: 60px;
+            }
+            
+            .case-study {
+                padding: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="grid-bg"></div>
+    <div class="glow"></div>
+    
+    <div class="container">
+        <div class="hero">
+            <span class="terminal-tag">~/steve-walker</span>
+            <h1>Data, <span class="highlight">AI</span> &<br>Performance</h1>
+            <p class="tagline">Building intelligent marketing systems that turn data into decisions and decisions into growth.</p>
+            <a href="https://www.journeyfurther.com" target="_blank" class="company-link">
+                @JourneyFurther →
+            </a>
+        </div>
+        
+        <div class="section">
+            <p class="section-title">About</p>
+            <p class="about-text">
+                I work at the intersection of marketing and technology — leveraging predictive analytics, 
+                real-time data systems, and AI to solve complex performance challenges. At Journey Further, 
+                we built Europe's fastest-growing agency by replacing gut feelings with machine intelligence.
+            </p>
+        </div>
+        
+        <div class="section">
+            <p class="section-title">Experience</p>
+            <div class="companies">
+                <span class="company"><img src="logos/journeyfurther.svg" alt="Journey Further" class="company-logo">Journey Further</span>
+                <span class="company"><img src="logos/apple.svg" alt="Apple" class="company-logo">Apple</span>
+                <span class="company"><img src="logos/omnicom.svg" alt="Omnicom" class="company-logo">Omnicom</span>
+                <span class="company"><img src="logos/dentsu.svg" alt="Dentsu" class="company-logo">Dentsu</span>
+            </div>
+        </div>
+        
+        <div class="section">
+            <p class="section-title">Latest Writing</p>
+            <a href="predictive-analytics-retail-article.html" class="article-card" style="margin-bottom: 20px;">
+                <div class="article-card-header">
+                    <img src="steve-headshot.jpg" alt="Steve Walker" class="article-card-avatar">
+                    <div class="article-card-content">
+                        <span class="article-card-tag">Predictive Analytics</span>
+                        <h3 class="article-card-title">Predictive Analytics in Retail: From Forecasting to Real-Time Decision Engines</h3>
+                        <p class="article-card-excerpt">The gap between retailers who guess and retailers who know is widening fast. Practical applications, tools, and ROI — including a deep dive into the Boots Hearingcare case study.</p>
+                        <span class="article-card-date">January 28, 2026</span>
+                    </div>
+                </div>
+            </a>
+            <a href="mcp-marketing-article.html" class="article-card" style="margin-bottom: 20px;">
+                <div class="article-card-header">
+                    <img src="steve-headshot.jpg" alt="Steve Walker" class="article-card-avatar">
+                    <div class="article-card-content">
+                        <span class="article-card-tag">AI Infrastructure</span>
+                        <h3 class="article-card-title">MCP: The Protocol That Will Transform Marketing Automation</h3>
+                        <p class="article-card-excerpt">Anthropic's Model Context Protocol is the USB-C of AI applications — a universal connector that lets AI agents plug into any tool, database, or API. For marketers, this changes everything.</p>
+                        <span class="article-card-date">January 29, 2026</span>
+                    </div>
+                </div>
+            </a>
+            <a href="ai-seo-article.html" class="article-card" style="margin-bottom: 20px;">
+                <div class="article-card-header">
+                    <img src="steve-headshot.jpg" alt="Steve Walker" class="article-card-avatar">
+                    <div class="article-card-content">
+                        <span class="article-card-tag">SEO & AI</span>
+                        <h3 class="article-card-title">The Death of Keywords: How AI is Rewriting the Rules of SEO</h3>
+                        <p class="article-card-excerpt">For two decades, SEO was built on keywords. But AI-powered search understands entities, intent, and context. The playbook that got you here won't get you there.</p>
+                        <span class="article-card-date">January 29, 2026</span>
+                    </div>
+                </div>
+            </a>
+            <a href="ai-agents-b2b-article.html" class="article-card" style="margin-bottom: 20px;">
+                <div class="article-card-header">
+                    <img src="steve-headshot.jpg" alt="Steve Walker" class="article-card-avatar">
+                    <div class="article-card-content">
+                        <span class="article-card-tag">B2B Sales</span>
+                        <h3 class="article-card-title">AI Agents Are Coming for B2B Sales (And That's a Good Thing)</h3>
+                        <p class="article-card-excerpt">The traditional SDR role is being automated. AI agents can now research prospects, personalize outreach, and book meetings — at a fraction of the cost. Here's what it means.</p>
+                        <span class="article-card-date">January 29, 2026</span>
+                    </div>
+                </div>
+            </a>
+            <a href="ucp-article.html" class="article-card">
+                <div class="article-card-header">
+                    <img src="steve-headshot.jpg" alt="Steve Walker" class="article-card-avatar">
+                    <div class="article-card-content">
+                        <span class="article-card-tag">Agentic Commerce</span>
+                        <h3 class="article-card-title">Google's Universal Commerce Protocol: The Infrastructure for Agentic Shopping</h3>
+                        <p class="article-card-excerpt">Google just announced UCP — an open standard that could fundamentally reshape how AI agents interact with e-commerce. Here's what you need to know.</p>
+                        <span class="article-card-date">January 28, 2026</span>
+                    </div>
+                </div>
+            </a>
+        </div>
+        
+        <div class="section">
+            <p class="section-title">Case Study</p>
+            <div class="case-study">
+                <div class="case-study-header">
+                    <span class="case-study-client">Boots Hearingcare</span>
+                    <span class="case-study-tag">Predictive Analytics</span>
+                </div>
+                <p class="case-study-desc">
+                    Built a real-time data pipeline and predictive model to optimize appointment bookings 
+                    at postcode-level granularity. Custom ETL extracts live availability data, feeds predictive 
+                    models, and automatically adjusts Google Ads bidding via API — all in real-time.
+                </p>
+                <div class="tech-stack">
+                    <span class="tech">ETL Pipeline</span>
+                    <span class="tech">Predictive Analytics</span>
+                    <span class="tech">Google Ads API</span>
+                    <span class="tech">Real-time Bidding</span>
+                    <span class="tech">Geospatial Viz</span>
+                </div>
+                <div class="metrics">
+                    <div class="metric">
+                        <div class="metric-value">+31%</div>
+                        <div class="metric-label">Bookings</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">-20%</div>
+                        <div class="metric-label">CPA</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <p class="section-title">Stack</p>
+            <div class="expertise">
+                <span class="skill primary">AI/ML</span>
+                <span class="skill primary">Predictive Analytics</span>
+                <span class="skill">Data Engineering</span>
+                <span class="skill">SEO</span>
+                <span class="skill">Technical SEO</span>
+                <span class="skill">Paid Search</span>
+                <span class="skill">API Integrations</span>
+                <span class="skill">Marketing Automation</span>
+            </div>
+        </div>
+        
+        <div class="section">
+            <p class="section-title">Get In Touch</p>
+            <p class="about-text" style="margin-bottom: 28px;">
+                Looking to discuss AI strategy, predictive analytics, or performance marketing? Drop me a message.
+            </p>
+            <form class="contact-form" name="contact" method="POST" action="/thank-you.html" data-netlify="true" netlify-honeypot="bot-field">
+                <input type="hidden" name="form-name" value="contact">
+                <p style="display:none;">
+                    <label>Don't fill this out: <input name="bot-field"></label>
+                </p>
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" placeholder="Your name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="you@company.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" placeholder="Tell me about your project or challenge..." required></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Send Message →</button>
+            </form>
+            <div class="connect" style="margin-top: 32px;">
+                <a href="https://www.linkedin.com/in/steve-walker-62699125/" target="_blank" class="connect-btn secondary">
+                    LinkedIn
+                </a>
+                <a href="https://www.journeyfurther.com" target="_blank" class="connect-btn secondary">
+                    Journey Further
+                </a>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>© 2026 steve_walker</p>
+        </div>
+    </div>
+</body>
+</html>

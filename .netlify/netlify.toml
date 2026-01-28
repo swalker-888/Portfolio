@@ -1,0 +1,30 @@
+plugins = []
+headers = []
+redirects = []
+
+[[forms]]
+name = "contact"
+success = "/thank-you.html"
+
+[functions]
+
+[functions."*"]
+
+[build]
+publish = "/home/node/clawd/website"
+publishOrigin = "config"
+base = "/home/node/clawd/website"
+
+[build.environment]
+
+[build.processing]
+
+[build.processing.css]
+
+[build.processing.html]
+
+[build.processing.images]
+
+[build.processing.js]
+
+[build.services]
