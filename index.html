@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='%232563eb'/></svg>">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Steve Walker | AI & Performance Marketing</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -506,6 +507,33 @@
             font-family: 'JetBrains Mono', monospace;
         }
         
+        /* Page load and scroll animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .hero {
+            animation: fadeInUp 0.8s ease-out;
+        }
+        
+        .section {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
         @media (max-width: 600px) {
             .container {
                 padding: 40px 20px;
@@ -532,7 +560,7 @@
     <div class="container">
         <div class="hero">
             <span class="terminal-tag">~/steve-walker</span>
-            <h1>Data, <span class="highlight">AI</span> &<br>Performance</h1>
+            <h1>Engineering<br><span class="highlight">Marketing Performance</span></h1>
             <p class="tagline">Building intelligent marketing systems that turn data into decisions and decisions into growth.</p>
             <a href="https://www.journeyfurther.com" target="_blank" class="company-link">
                 @JourneyFurther →
@@ -682,5 +710,22 @@
             <p>© 2026 steve_walker</p>
         </div>
     </div>
+<script>
+        // Scroll reveal animation
+        const sections = document.querySelectorAll('.section');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        });
+        
+        sections.forEach(section => observer.observe(section));
+    </script>
 </body>
 </html>
