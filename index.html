@@ -636,11 +636,7 @@
             <p class="about-text" style="margin-bottom: 28px;">
                 Looking to discuss AI strategy, predictive analytics, or performance marketing? Drop me a message.
             </p>
-            <form class="contact-form" method="POST" action="https://formsubmit.co/sw876543@icloud.com">
-                <input type="hidden" name="_subject" value="New contact from portfolio site">
-                <input type="hidden" name="_captcha" value="false">
-                <input type="hidden" name="_next" value="https://portfolio-swalker-888s-projects.vercel.app/thank-you.html">
-                <input type="text" name="_honey" style="display:none">
+            <form class="contact-form" id="contact-form">
                 <div class="form-group">
                     <label for="name">Name</label>
                     <input type="text" id="name" name="name" placeholder="Your name" required>
@@ -653,8 +649,41 @@
                     <label for="message">Message</label>
                     <textarea id="message" name="message" placeholder="Tell me about your project or challenge..." required></textarea>
                 </div>
-                <button type="submit" class="submit-btn">Send Message →</button>
+                <button type="submit" class="submit-btn" id="submit-btn">Send Message →</button>
             </form>
+            <script>
+                document.getElementById('contact-form').addEventListener('submit', async (e) => {
+                    e.preventDefault();
+                    const btn = document.getElementById('submit-btn');
+                    const originalText = btn.textContent;
+                    btn.textContent = 'Sending...';
+                    btn.disabled = true;
+                    
+                    const formData = {
+                        name: document.getElementById('name').value,
+                        email: document.getElementById('email').value,
+                        message: document.getElementById('message').value
+                    };
+                    
+                    try {
+                        const res = await fetch('/api/contact', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(formData)
+                        });
+                        
+                        if (res.ok) {
+                            window.location.href = '/thank-you.html';
+                        } else {
+                            throw new Error('Failed to send');
+                        }
+                    } catch (err) {
+                        alert('Failed to send message. Please try again.');
+                        btn.textContent = originalText;
+                        btn.disabled = false;
+                    }
+                });
+            </script>
             <div class="connect" style="margin-top: 32px;">
                 <a href="https://www.linkedin.com/in/steve-walker-62699125/" target="_blank" class="connect-btn secondary">
                     LinkedIn
